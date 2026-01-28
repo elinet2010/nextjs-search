@@ -121,3 +121,81 @@ test('mi componente', () => {
 ```
 
 
+
+## 🔐 Integración con Pasarela de Pago (Conceptual)
+
+### ¿Qué es una pasarela de pago?
+
+Una **pasarela de pago** es un servicio externo (como Stripe o PayPal) que se encarga de procesar los pagos de forma segura.
+
+### Opciones de pasarelas a considerar:
+
+1. **Stripe** 
+   - Muy popular y confiable
+   - Excelente documentación para desarrolladores
+   - Soporta múltiples países y monedas
+   - Ideal para: proyectos que buscan una solución moderna y bien documentada
+
+2. **PayPal**
+   - Amplia aceptación mundial
+   - Los usuarios pueden pagar sin ingresar tarjeta (si tienen cuenta PayPal)
+   - Ideal para: proyectos que buscan máxima aceptación del usuario
+
+3. **Mercado Pago**
+   - Especializado en mercado latinoamericano
+   - Soporte para métodos de pago locales
+   - Ideal para: proyectos enfocados en usuarios de Latinoamérica
+
+### Flujo de pago paso a paso:
+
+**Paso 1: Usuario selecciona vehículo**
+- El usuario completa la búsqueda y elige un vehículo
+- Ve el resumen de su reserva con el precio total
+
+**Paso 2: Usuario hace clic en "Proceder al pago"**
+- En la página de resumen (`/summary`), aparece el botón para pagar
+- El sistema prepara toda la información necesaria
+
+**Paso 3: Redirección a la pasarela de pago**
+- El usuario es redirigido a la plataforma de pago (Stripe, PayPal, etc.)
+- Se envía la siguiente información:
+  - 💰 **Monto total** a pagar
+  - 🚗 **Información del vehículo** (modelo, tipo, etc.)
+  - 📅 **Fechas de reserva** (fecha de recogida y devolución)
+  - 👤 **Datos del cliente** (nombre, email, etc.)
+
+**Paso 4: Usuario completa el pago**
+- El usuario ingresa sus datos de pago en la plataforma segura
+- La pasarela procesa el pago y valida los fondos
+
+**Paso 5: Confirmación del pago**
+- La pasarela envía una confirmación a nuestro sistema
+- Nuestro sistema actualiza el estado de la reserva (de "pendiente" a "confirmada")
+
+**Paso 6: Notificación al cliente**
+- Se envía un email de confirmación al cliente
+- El cliente puede ver su reserva confirmada en la aplicación
+
+### Consideraciones técnicas para implementación:
+
+> **Nota para desarrolladores:** Estos son los aspectos técnicos que deben considerarse al implementar la integración.
+
+- **Endpoint seguro para procesar pago**
+  - Crear una ruta API (`/api/payment/process`) que maneje la creación de la sesión de pago
+  - Validar que todos los datos sean correctos antes de enviar a la pasarela
+  - Usar autenticación para proteger el endpoint
+
+- **Webhooks para confirmaciones**
+  - Configurar endpoints que reciban notificaciones de la pasarela cuando un pago se complete
+  - Ejemplo: `/api/payment/webhook` que recibe eventos de Stripe/PayPal
+  - Validar la firma del webhook para asegurar que viene de la pasarela legítima
+
+- **Manejo de estados de pago**
+  - Definir estados claros: `pending` (pendiente), `completed` (completado), `failed` (fallido)
+  - Actualizar el estado en la base de datos según la respuesta de la pasarela
+  - Manejar casos de error (pago rechazado, tarjeta sin fondos, etc.)
+
+- **Validación de montos**
+  - Verificar que el monto enviado a la pasarela coincida con el calculado en nuestro sistema
+  - Prevenir manipulación de precios antes de enviar a la pasarela
+  - Recalcular el monto en el servidor, no confiar solo en el valor del cliente

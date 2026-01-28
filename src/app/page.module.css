@@ -6,6 +6,7 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  background-attachment: fixed;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -73,6 +74,7 @@
 @media (max-width: 768px) {
   .main {
     padding: var(--spacing-lg) 0;
+    background-attachment: scroll; /* Deshabilitar fixed en móviles para mejor rendimiento */
   }
 
   .hero {
