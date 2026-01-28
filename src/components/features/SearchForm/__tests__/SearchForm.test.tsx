@@ -21,7 +21,7 @@ describe('SearchForm', () => {
   it('debe renderizar el formulario correctamente', () => {
     renderWithProviders(<SearchForm />);
 
-    expect(screen.getByLabelText(/ciudad o aeropuerto/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/ciudad o país/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/fecha de recogida/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/fecha de devolución/i)).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /buscar/i })).toBeInTheDocument();
@@ -43,17 +43,50 @@ describe('SearchForm', () => {
     const user = userEvent.setup();
     renderWithProviders(<SearchForm />);
 
-    const locationInput = screen.getByLabelText(/ciudad o aeropuerto/i);
+    const locationInput = screen.getByLabelText(/ciudad o país/i);
     await user.type(locationInput, 'Madrid');
 
     expect(locationInput).toHaveValue('Madrid');
+  });
+
+  it('debe mostrar sugerencias de países/ciudades al escribir', async () => {
+    const user = userEvent.setup();
+    renderWithProviders(<SearchForm />);
+
+    const locationInput = screen.getByLabelText(/ciudad o país/i);
+    await user.type(locationInput, 'Mad');
+
+    // Esperar a que aparezcan las sugerencias
+    await screen.findByRole('listbox');
+    const suggestions = screen.getAllByRole('option');
+    expect(suggestions.length).toBeGreaterThan(0);
+    expect(suggestions.length).toBeLessThanOrEqual(3);
+  });
+
+  it('debe permitir seleccionar una sugerencia', async () => {
+    const user = userEvent.setup();
+    renderWithProviders(<SearchForm />);
+
+    const locationInput = screen.getByLabelText(/ciudad o país/i);
+    await user.type(locationInput, 'Mad');
+
+    // Esperar a que aparezcan las sugerencias
+    const suggestions = await screen.findAllByRole('option');
+    expect(suggestions.length).toBeGreaterThan(0);
+
+    // Hacer clic en la primera sugerencia
+    await user.click(suggestions[0]);
+
+    // Verificar que el valor se haya actualizado
+    const selectedValue = suggestions[0].textContent || '';
+    expect(locationInput).toHaveValue(selectedValue);
   });
 
   it('debe validar que la ubicación tenga al menos 2 caracteres', async () => {
     const user = userEvent.setup();
     renderWithProviders(<SearchForm />);
 
-    const locationInput = screen.getByLabelText(/ciudad o aeropuerto/i);
+    const locationInput = screen.getByLabelText(/ciudad o país/i);
     await user.type(locationInput, 'M');
     await user.clear(locationInput);
     await user.type(locationInput, 'M');
@@ -62,6 +95,10 @@ describe('SearchForm', () => {
     // Verificar que el input tiene el valor
     expect(locationInput).toHaveValue('M');
     
+    // No deberían aparecer sugerencias con solo 1 carácter
+    const suggestions = screen.queryByRole('listbox');
+    expect(suggestions).not.toBeInTheDocument();
+    
     // Al enviar el formulario, debería mostrar el error
     const submitButton = screen.getByRole('button', { name: /buscar/i });
     await user.click(submitButton);
@@ -69,6 +106,31 @@ describe('SearchForm', () => {
     // Esperar a que aparezca algún error de validación
     const errorMessages = await screen.findAllByRole('alert');
     expect(errorMessages.length).toBeGreaterThan(0);
+  });
+
+  it('debe navegar con teclado en las sugerencias', async () => {
+    const user = userEvent.setup();
+    renderWithProviders(<SearchForm />);
+
+    const locationInput = screen.getByLabelText(/ciudad o país/i);
+    await user.type(locationInput, 'Mad');
+
+    // Esperar a que aparezcan las sugerencias
+    const suggestions = await screen.findAllByRole('option');
+    expect(suggestions.length).toBeGreaterThan(0);
+
+    // Navegar hacia abajo con la flecha
+    await user.keyboard('{ArrowDown}');
+    
+    // La primera sugerencia debería estar enfocada
+    expect(suggestions[0]).toHaveAttribute('aria-selected', 'true');
+
+    // Seleccionar con Enter
+    await user.keyboard('{Enter}');
+    
+    // Verificar que el valor se haya actualizado
+    const selectedValue = suggestions[0].textContent || '';
+    expect(locationInput).toHaveValue(selectedValue);
   });
 });
 

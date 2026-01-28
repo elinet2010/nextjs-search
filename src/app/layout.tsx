@@ -16,6 +16,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es">
+      <head>
+        <link rel="icon" href="https://www.outletrentalcars.com/themes/outlet/favicon.ico" />
+      </head>
       <body>
         <StoreProvider>
           <SkipLink />

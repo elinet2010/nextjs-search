@@ -144,7 +144,7 @@ describe('searchVehicles thunk', () => {
       returnDate: new Date('2024-12-05'),
     };
 
-    mockSearchVehicles.mockResolvedValue([]);
+    mockSearchVehiclesFn.mockResolvedValue([]);
 
     await store.dispatch(searchVehicles(params));
 

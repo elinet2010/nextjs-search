@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { searchVehicles } from '@/store/thunks';
 import { Input } from '@/components/ui/Input';
+import { CountryAutocomplete } from '@/components/ui/CountryAutocomplete';
 import { DatePicker } from '@/components/ui/DatePicker';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
@@ -27,8 +28,7 @@ export function SearchForm() {
 
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  const handleLocationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newLocation = e.target.value;
+  const handleLocationChange = (newLocation: string) => {
     setFormData((prev) => ({ ...prev, location: newLocation }));
     
     // Validación en tiempo real (solo si ya hay un error o el campo tiene contenido)
@@ -154,16 +154,15 @@ export function SearchForm() {
         )}
 
         <div className={styles.fields}>
-          <Input
-            label="Ciudad o Aeropuerto"
+          <CountryAutocomplete
+            label="Ciudad o País"
             name="location"
             value={formData.location || ''}
             onChange={handleLocationChange}
-            placeholder="Ej: Madrid, MAD"
+            placeholder="Ej: Madrid, España"
             error={errors.location}
             required
             fullWidth
-            autoComplete="off"
           />
 
           <DatePicker

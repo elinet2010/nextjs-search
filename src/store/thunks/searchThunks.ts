@@ -19,8 +19,8 @@ export const searchVehicles = createAsyncThunk(
       const vehicles = await vehicleService.searchVehicles(params);
 
       dispatch(setVehicles(vehicles));
-      dispatch(setSearchLoading(false));
       dispatch(setVehicleLoading(false));
+      dispatch(setSearchLoading(false));
 
       return vehicles;
     } catch (error) {
