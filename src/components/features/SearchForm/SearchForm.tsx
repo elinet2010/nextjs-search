@@ -141,7 +141,6 @@ export function SearchForm() {
   return (
     <Card variant="elevated" padding="lg" className={styles.formCard}>
       <form onSubmit={handleSubmit} className={styles.form} noValidate>
-        <h2 className={styles.title}>Buscar Vehículo</h2>
 
         {error && (
           <ErrorMessage

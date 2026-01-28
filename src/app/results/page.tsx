@@ -51,7 +51,7 @@ export default async function ResultsPage({ searchParams }: ResultsPageProps) {
 
   return (
     <>
-      <Header logo={<h1>OutletRentalCars</h1>} />
+      <Header />
       <main id="main-content" className={styles.main}>
         <Container size="xl">
           <div className={styles.header}>

@@ -1,10 +1,11 @@
 .header {
-  background-color: var(--color-bg-primary);
-  border-bottom: var(--border-width) solid var(--color-border-light);
+  border-bottom: var(--border-width) solid var(--color-bg-dark);
   padding: var(--spacing-md) 0;
   position: sticky;
   top: 0;
   z-index: var(--z-index-sticky);
+  backdrop-filter: blur(10px);
+  background-color: var(--color-bg-light);
 }
 
 .container {
@@ -22,7 +23,7 @@
   align-items: center;
   font-size: var(--font-size-xl);
   font-weight: var(--font-weight-bold);
-  color: var(--color-primary);
+  color: var(--color-text-light);
 }
 
 .nav {

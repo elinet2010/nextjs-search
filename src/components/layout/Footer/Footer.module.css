@@ -1,6 +1,6 @@
 .footer {
-  background-color: var(--color-bg-secondary);
-  border-top: var(--border-width) solid var(--color-border-light);
+  background-color: var(--color-bg-dark);
+  border-top: var(--border-width) solid var(--color-bg-dark);
   padding: var(--spacing-lg) 0;
   margin-top: auto;
 }
@@ -13,7 +13,7 @@
 
 .copyright {
   text-align: center;
-  color: var(--color-text-secondary);
+  color: var(--color-text-light);
   font-size: var(--font-size-sm);
   margin: 0;
 }

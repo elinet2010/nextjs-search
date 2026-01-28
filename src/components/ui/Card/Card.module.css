@@ -1,16 +1,17 @@
 .card {
-  background-color: var(--color-bg-primary);
+  background-color: var(--color-text-light);
   border-radius: var(--border-radius-lg);
   transition: all var(--transition-base);
+  color: var(--color-text-dark);
 }
 
 /* Variantes */
 .default {
-  border: var(--border-width) solid var(--color-border-light);
+  border: var(--border-width) solid var(--color-bg-light);
 }
 
 .outlined {
-  border: var(--border-width) solid var(--color-border);
+  border: var(--border-width) solid var(--color-bg-light);
 }
 
 .elevated {

@@ -53,7 +53,7 @@ export default function SummaryPage() {
 
   return (
     <>
-      <Header logo={<h1>OutletRentalCars</h1>} />
+      <Header />
       <main id="main-content" className={styles.main}>
         <Container size="lg">
           <div className={styles.header}>
@@ -159,7 +159,7 @@ export default function SummaryPage() {
                 size="lg"
                 onClick={() => {
                   // Aquí se integraría con la pasarela de pago
-                  alert('Integración con pasarela de pago (conceptual)');
+                  alert('Redireccionando a la pasarela de pago...');
                 }}
                 className={styles.payButton}
               >

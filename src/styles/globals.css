@@ -75,9 +75,27 @@ textarea:focus-visible {
 /* Mejorar contraste para modo de alto contraste */
 @media (prefers-contrast: high) {
   :root {
-    --color-border: #000000;
-    --color-text-primary: #000000;
-    --color-text-secondary: #000000;
+    --color-border: #ffffff;
+    --color-text-primary: #ffffff;
+    --color-text-secondary: #ffffff;
+    --color-bg-primary: #000000;
   }
+}
+
+/* Utilidad para subrayado verde (accent) */
+.highlight-green {
+  position: relative;
+  display: inline-block;
+}
+
+.highlight-green::after {
+  content: '';
+  position: absolute;
+  bottom: 0.2em;
+  left: 0;
+  right: 0;
+  height: 0.15em;
+  background-color: var(--color-accent);
+  z-index: -1;
 }
 

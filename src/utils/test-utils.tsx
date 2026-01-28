@@ -1,21 +1,23 @@
 import React, { type ReactElement } from 'react';
 import { render, type RenderOptions } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import { configureStore, type PreloadedState } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import type { RootState, AppStore } from '@/store';
-import searchSlice from '@/store/slices/searchSlice';
-import vehicleSlice from '@/store/slices/vehicleSlice';
-import bookingSlice from '@/store/slices/bookingSlice';
+import searchReducer from '@/store/slices/searchSlice';
+import vehicleReducer from '@/store/slices/vehicleSlice';
+import bookingReducer from '@/store/slices/bookingSlice';
+
+// Tipo para preloadedState
+type PreloadedState = Partial<RootState>;
 
 // Esta función crea un store de Redux para testing
-export function createTestStore(preloadedState?: PreloadedState<RootState>): AppStore {
-  return configureStore({
+export function createTestStore(preloadedState?: PreloadedState): AppStore {
+  const storeConfig: Parameters<typeof configureStore>[0] = {
     reducer: {
-      search: searchSlice,
-      vehicles: vehicleSlice,
-      booking: bookingSlice,
+      search: searchReducer,
+      vehicles: vehicleReducer,
+      booking: bookingReducer,
     },
-    preloadedState,
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
         serializableCheck: {
@@ -37,12 +39,18 @@ export function createTestStore(preloadedState?: PreloadedState<RootState>): App
           ],
         },
       }),
-  });
+  };
+
+  if (preloadedState && Object.keys(preloadedState).length > 0) {
+    storeConfig.preloadedState = preloadedState as any;
+  }
+
+  return configureStore(storeConfig) as AppStore;
 }
 
 // Helper para renderizar componentes con Redux Provider
 interface ExtendedRenderOptions extends Omit<RenderOptions, 'wrapper'> {
-  preloadedState?: PreloadedState<RootState>;
+  preloadedState?: PreloadedState;
   store?: AppStore;
 }
 

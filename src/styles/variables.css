@@ -1,31 +1,37 @@
 :root {
-  /* Colors - Primary */
-  --color-primary: #0070f3;
-  --color-primary-dark: #0051cc;
-  --color-primary-light: #3291ff;
+  /* Colors - Primary (Morado/Púrpura para botones) */
+  --color-primary: #8b5cf6;
+  --color-primary-dark: #7c3aed;
+  --color-primary-light: #a78bfa;
 
-  /* Colors - Secondary */
-  --color-secondary: #6c757d;
-  --color-secondary-dark: #5a6268;
-  --color-secondary-light: #868e96;
+  /* Colors - Secondary (Verde para acentos y subrayados) */
+  --color-secondary: #4ade80;
+  --color-secondary-dark: #22c55e;
+  --color-secondary-light: #86efac;
+
+  /* Colors - Accent (Verde para énfasis) */
+  --color-accent: #4ade80;
+  --color-accent-dark: #22c55e;
+  --color-accent-light: #86efac;
 
   /* Colors - Status */
-  --color-success: #28a745;
-  --color-error: #dc3545;
-  --color-warning: #ffc107;
-  --color-info: #17a2b8;
+  --color-success: #22c55e;
+  --color-error: #ef4444;
+  --color-warning: #f59e0b;
+  --color-info: #3b82f6;
 
   /* Colors - Text */
-  --color-text-primary: #212529;
-  --color-text-secondary: #6c757d;
+  --color-text-primary: #334155
+  --color-text-secondary: #e5e7eb;
   --color-text-light: #ffffff;
-  --color-text-muted: #adb5bd;
+  --color-text-muted: #9ca3af;
+  --color-text-dark: #1f2937;
 
-  /* Colors - Background */
-  --color-bg-primary: #ffffff;
-  --color-bg-secondary: #f8f9fa;
-  --color-bg-dark: #212529;
-  --color-bg-light: #ffffff;
+  /* Colors - Background (Azul oscuro) */
+  --color-bg-primary: #c8d5f5;
+  --color-bg-secondary: #f7f5f8;
+  --color-bg-dark: #334155; /*#0a0e1a;*/
+  --color-bg-light: #ededed;
 
   /* Colors - Border */
   --color-border: #dee2e6;
@@ -52,7 +58,7 @@
   --font-size-lg: 1.25rem; /* 20px */
   --font-size-xl: 1.5rem; /* 24px */
   --font-size-2xl: 2rem; /* 32px */
-  --font-size-3xl: 3rem; /* 48px */
+  --font-size-3xl: 2.5rem; /* 48px */
 
   --font-weight-normal: 400;
   --font-weight-medium: 500;
@@ -101,10 +107,6 @@
 }
 
 /* Dark mode support (para futuro) */
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* Puedes agregar variables para dark mode aquí */
-  }
-}
+/* El tema oscuro ya está aplicado por defecto */
 
 
