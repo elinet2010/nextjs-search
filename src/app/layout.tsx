@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="es">
       <head>
-        <link rel="icon" href="https://www.outletrentalcars.com/themes/outlet/favicon.ico" />
+        <link rel="icon" href="/img/rental-car-favicon.jpg" />
       </head>
       <body>
         <StoreProvider>
