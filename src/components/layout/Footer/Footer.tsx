@@ -11,7 +11,7 @@ export function Footer({ children }: FooterProps) {
       <div className={styles.container}>
         {children || (
           <p className={styles.copyright}>
-            © {new Date().getFullYear()} OutletRentalCars. Todos los derechos
+            © {new Date().getFullYear()} Búsqueda y reserva de alquiler de autos. Todos los derechos
             reservados.
           </p>
         )}
@@ -19,5 +19,8 @@ export function Footer({ children }: FooterProps) {
     </footer>
   );
 }
+
+
+
 
 

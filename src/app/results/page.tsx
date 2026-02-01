@@ -7,8 +7,8 @@ import { VehicleService } from '@/domain/services/VehicleService';
 import { VehicleRepository } from '@/infrastructure/repositories/VehicleRepository';
 import type { SearchParams } from '@/domain/entities/SearchParams';
 import styles from './page.module.css';
-
-interface ResultsPageProps {
+import { NewSearchButton } from '@/components/features/NewSearchButton';
+interface ResultsPageProps {  
   searchParams: {
     location?: string;
     pickupDate?: string;
@@ -85,6 +85,7 @@ export default async function ResultsPage({ searchParams }: ResultsPageProps) {
             </div>
           </div>
           <VehicleList initialVehicles={vehicles} searchParams={params} />
+          <NewSearchButton />
         </Container>
       </main>
       <Footer />

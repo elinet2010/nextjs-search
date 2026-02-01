@@ -116,3 +116,6 @@ export function searchCountries(searchTerm: string, maxResults: number = 3): str
   return results.slice(0, maxResults);
 }
 
+
+
+

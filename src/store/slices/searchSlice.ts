@@ -41,3 +41,6 @@ export const { setSearchParams, setLoading, setError, clearSearch } =
 export default searchSlice.reducer;
 
 
+
+
+

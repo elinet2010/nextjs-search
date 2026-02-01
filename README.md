@@ -1,4 +1,4 @@
-# OutletRentalCars - Búsqueda de Vehículos
+# Búsqueda y reserva de alquiler de autos
 
 Aplicación Next.js para búsqueda y selección de vehículos con arquitectura escalable, principios SOLID y mejores prácticas.
 

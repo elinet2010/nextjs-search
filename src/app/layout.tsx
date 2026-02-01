@@ -5,7 +5,7 @@ import StoreProvider from '@/store/StoreProvider';
 import { SkipLink } from '@/components/layout/SkipLink';
 
 export const metadata: Metadata = {
-  title: 'OutletRentalCars - Búsqueda de Vehículos',
+  title: 'Búsqueda y reserva de alquiler de autos',
   description: 'Busca y selecciona el vehículo perfecto para tu viaje',
 };
 
